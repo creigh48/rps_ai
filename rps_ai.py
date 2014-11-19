@@ -1,49 +1,61 @@
 __author__ = 'jeffrey creighton & anad patel'
 import random
 
-paper_goodess = 0
-rock_goodness = 0
-scissor_goodness = 0
 
-pre = 10
-def chose(pre):
-    if(pre > 0):
-        choice = random.randint(1, 3)
-        if(choice == 1):
-            choose_rock()
-        elif(choice == 2):
-            choose_paper()
-        elif(choice == 3):
-            choose_scissors()
-        pre -= 1
-        collect_data()
-        return pre
+class RPS_AI:
+    def __init__(self):
+        self.paper_goodess = 0
+        self.rock_goodness = 0
+        self.scissor_goodness = 0
+        self.pre_smart = 10
 
-    else:
-        if(get_paper_goodness() > get_rock_goodness() and get_paper_goodness() > get_scissor_goodness()):
-            choose_paper()
-        elif(get_rock_goodness() > get_paper_goodness() and get_rock_goodness() > get_scissor_goodness()):
-            choose_rock()
-        else:
-            choose_scissors()
-    collect_data()
+        def move(self, choice):
+            return choice
 
-def collect_data():
-    #retrieve who has won the match and assign a goodness value to combat the opponents previous move
+        def chose(self, pre_smart):
+            if (pre_smart > 0):
+                choice = random.randint(1, 3)
+                if (choice == 1):
+                    choose_rock(self)
+                elif (choice == 2):
+                    choose_paper(self)
+                elif (choice == 3):
+                    choose_scissors(self)
+                pre_smart -= 1
+                collect_data(self)
+            else:
+                if (get_paper_goodness(self) > get_rock_goodness(self) and get_paper_goodness(self) > get_scissor_goodness(self)):
+                    choose_paper(self)
+                elif (get_rock_goodness(self) > get_paper_goodness(self) and get_rock_goodness(self) > get_scissor_goodness(self)):
+                    choose_rock(self)
+                else:
+                    choose_scissors(self)
 
+            collect_data(self)
 
+        #Param is the opponents last move, assigns to appropriate goodness value
+        def collect_data(self, past_move):
+            if(past_move == 0):
+                self.paper_goodess = get_paper_goodness(self) + 1
+            elif(past_move == 1):
+                self.scissor_goodness = get_scissor_goodness(self) + 1
+            elif(past_move == 2):
+                self.rock_goodness = get_rock_goodness(self) + 1
 
-def get_paper_goodness():
-    return paper_goodess
+        def get_paper_goodness(self):
+            return self.paper_goodess
 
-def get_rock_goodness():
-    return rock_goodness
+        def get_rock_goodness(self):
+            return self.rock_goodness
 
-def get_scissor_goodness():
-    return scissor_goodness
+        def get_scissor_goodness(self):
+            return self.scissor_goodness
 
-def choose_rock():
+        def choose_rock(self):
+            self.move(self, 0)
 
-def choose_paper():
+        def choose_paper(self):
+            self.move(self, 1)
 
-def choose_scissors():
+        def choose_scissors(self):
+            self.move(self, 2)
