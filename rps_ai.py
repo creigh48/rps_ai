@@ -21,7 +21,7 @@ class RPS_AI:
                     choose_paper(self)
                 elif (choice == 3):
                     choose_scissors(self)
-                pre_smart -= 1
+                self.pre_smart -= 1
                 collect_data(self)
             else:
                 if (get_paper_goodness(self) > get_rock_goodness(self) and get_paper_goodness(self) > get_scissor_goodness(self)):
