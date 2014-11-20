@@ -9,6 +9,8 @@ class JCAPPlayer(Player.Player):
         self.pre_smart = 3
         self.decrementing = 25
 
+        # Decide to make a smart or random move and
+        # return  the final decision
         def choose(self):
             if self.pre_smart > 0:
                 choice = explore()
@@ -22,21 +24,26 @@ class JCAPPlayer(Player.Player):
                     self.decrementing =- 1
             return choice
 
+        # Make a random move
         def explore():
             return random.randint(0,2)
 
+        # Make an educated guess
         def exploit():
             if self.moves[0] == self.moves[1] and self.moves[0] == self.moves[2]:
                 return explore()
             else:
                 return self.moves.index(max(self.moves))
 
+        # Return instance variable 'name'
         def get_name(self):
             return self.name
 
+        # Set instance variable 'name'
         def set_name(self, playername):
             self.name = playername
 
+        # Get messages of previous moves or alert of new game
         def notify(self, message):
             if message[0] == Message.MatchStart:
                 self.moves = [0,0,0]
@@ -50,5 +57,6 @@ class JCAPPlayer(Player.Player):
             else:
                 pass
 
+        # Returns either 0, 1, or 2
         def play(self):
             return choose(self)
