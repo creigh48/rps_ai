@@ -7,7 +7,7 @@ class JCAPPlayer(Player.Player):
         self.name = None
         self.moves =[0,0,0]
         self.pre_smart = 3
-        self.decrementing = 25
+        self.decrementing = 45
 
         # Decide to make a smart or random move and
         # return  the final decision
@@ -20,6 +20,7 @@ class JCAPPlayer(Player.Player):
                     choice = explore()
                 else:
                     choice = exploit()
+                # to always have at least  a 5% random selection rate
                 if self.decrementing > 5:
                     self.decrementing =- 1
             return choice
@@ -30,9 +31,11 @@ class JCAPPlayer(Player.Player):
 
         # Make an educated guess
         def exploit():
+            # If values are all tied for 'goodness' make a random move
             if self.moves[0] == self.moves[1] and self.moves[0] == self.moves[2]:
                 return explore()
             else:
+                # Otherwise make the move with the best goodness
                 return self.moves.index(max(self.moves))
 
         # Return instance variable 'name'
@@ -45,10 +48,12 @@ class JCAPPlayer(Player.Player):
 
         # Get messages of previous moves or alert of new game
         def notify(self, message):
+            # If new match, reset variables from previous match
             if message[0] == Message.MatchStart:
                 self.moves = [0,0,0]
                 self.pre_smart = 3
                 self.decrementing = 25
+            # If end of game, collect opponents' move
             elif message[0] == Message.GameEnd:
                 if message[1] == get_name(self):
                     self.moves[int(message[4])] =+ 1
