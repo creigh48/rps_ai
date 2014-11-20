@@ -50,6 +50,8 @@ class RPS_AI:
         #Param is the opponents last move, assigns to appropriate goodness value
         def collect_data(self, past_move):
             self.moves[past_move] += 1
+
+
             # if(past_move == 0):
             #     self.rock_goodness = get_rock_goodness(self) + 1
             # elif(past_move == 1):
