@@ -67,3 +67,6 @@ class Scorekeeper:
     #returns this matchhistory
     def get_matchhistory(self):
         return self.matchhistory
+
+    def notify(self, msg):
+        pass
